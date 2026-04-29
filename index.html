@@ -24,6 +24,8 @@
       --lemkari:    #2e7d32;
       --inkado:     #e65100;
       --forki:      #6a1b9a;
+      --inkai:      #00838f;
+      --gokasi:     #bf360c;
     }
 
     body {
@@ -166,6 +168,8 @@
     .filter-btn[data-filter="lemkari"].active { background: var(--lemkari); border-color: var(--lemkari); color: #fff; }
     .filter-btn[data-filter="inkado"].active  { background: var(--inkado);  border-color: var(--inkado);  color: #fff; }
     .filter-btn[data-filter="forki"].active   { background: var(--forki);   border-color: var(--forki);   color: #fff; }
+    .filter-btn[data-filter="inkai"].active   { background: var(--inkai);   border-color: var(--inkai);   color: #fff; }
+    .filter-btn[data-filter="gokasi"].active  { background: var(--gokasi);  border-color: var(--gokasi);  color: #fff; }
     .result-info { font-size: 13px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
 
     /* ── Table ── */
@@ -227,6 +231,8 @@
     .badge-lemkari { background: #e8f5e9; color: var(--lemkari); }
     .badge-inkado  { background: #fff3e0; color: var(--inkado); }
     .badge-forki   { background: #f3e5f5; color: var(--forki); }
+    .badge-inkai   { background: #e0f5f6; color: var(--inkai); }
+    .badge-gokasi  { background: #fbe9e7; color: var(--gokasi); }
     .badge-default { background: #f5f5f5; color: #555; }
 
     /* ── Loading ── */
@@ -332,7 +338,7 @@
   //  KONFIGURASI — ganti SHEET_CSV_URL dengan link CSV
   //  Anda dari Google Sheets (lihat panduan)
   // ════════════════════════════════════════════════════
-  var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1-EmtwwhANZM051cI4JYkZi08pDoOlDjSqGIsrbzpcCk/export?format=csv&gid=0';
+  var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS9tuQQhDgJulXrJA-N4agG9HSGCxY4ObT-wEqZjyzweiWSGNlokE5usiR76miWVzm1eheLpJ-KzOvQ/pub?gid=1596301256&single=true&output=csv';
   //  Ganti angka gid=0 jika data ada di sheet lain
   //  (lihat URL saat sheet tersebut aktif di Spreadsheet)
 
@@ -367,16 +373,18 @@
     if (v.includes('lemkari')) return 'badge-lemkari';
     if (v.includes('inkado'))  return 'badge-inkado';
     if (v.includes('forki'))   return 'badge-forki';
+    if (v.includes('inkai'))   return 'badge-inkai';
+    if (v.includes('gokasi'))  return 'badge-gokasi';
     return 'badge-default';
   }
   function getColor(val) {
     var v = (val || '').toLowerCase();
-    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)' };
+    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)', inkai:'var(--inkai)', gokasi:'var(--gokasi)' };
     for (var k in map) if (v.includes(k)) return map[k];
     return 'var(--red)';
   }
   function getAccent(key) {
-    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)' };
+    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)', inkai:'var(--inkai)', gokasi:'var(--gokasi)' };
     return map[(key||'').toLowerCase()] || 'var(--red)';
   }
   function getInitial(name) {
