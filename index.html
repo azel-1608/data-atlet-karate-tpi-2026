@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Kontingen Karate – PORPROV KEPRI 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:        #c62828;
+      --red-dark:   #8e0000;
+      --red-light:  #ffebee;
+      --bg:         #f5f5f5;
+      --surface:    #ffffff;
+      --border:     #e0e0e0;
+      --text:       #1a1a1a;
+      --text-muted: #666666;
+      --radius:     12px;
+      --shadow:     0 2px 12px rgba(0,0,0,.08);
+      --inkanas:    #1565c0;
+      --lemkari:    #2e7d32;
+      --inkado:     #e65100;
+      --forki:      #6a1b9a;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 60%, #e53935 100%);
+      color: #fff;
+      padding: 28px 20px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .site-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50px;
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .site-header h1 {
+      font-size: clamp(18px, 5vw, 28px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .site-header p { font-size: 14px; opacity: .8; margin-top: 6px; }
+    .karate-icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+      display: block;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.3));
+    }
+    .sync-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+    .sync-dot {
+      width: 7px; height: 7px;
+      background: #69f0ae;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .5; transform: scale(.8); }
+    }
+
+    /* ── Container ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; }
+
+    /* ── Stats ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--accent, var(--red));
+      transition: transform .15s;
+    }
+    .stat-card:hover { transform: translateY(-2px); }
+    .stat-card .num  { font-size: 32px; font-weight: 800; color: var(--accent, var(--red)); line-height: 1; }
+    .stat-card .lbl  { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+
+    /* ── Toolbar ── */
+    .toolbar {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .search-wrap { position: relative; flex: 1; min-width: 180px; }
+    .search-wrap svg {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      width: 16px; height: 16px; color: var(--text-muted); pointer-events: none;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 10px 12px 10px 38px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+      background: #fff;
+    }
+    .search-wrap input:focus { border-color: var(--red); }
+    .filter-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 8px 14px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+      color: var(--text);
+    }
+    .filter-btn[data-filter="semua"].active   { background: var(--red);     border-color: var(--red);     color: #fff; }
+    .filter-btn[data-filter="inkanas"].active { background: var(--inkanas); border-color: var(--inkanas); color: #fff; }
+    .filter-btn[data-filter="lemkari"].active { background: var(--lemkari); border-color: var(--lemkari); color: #fff; }
+    .filter-btn[data-filter="inkado"].active  { background: var(--inkado);  border-color: var(--inkado);  color: #fff; }
+    .filter-btn[data-filter="forki"].active   { background: var(--forki);   border-color: var(--forki);   color: #fff; }
+    .result-info { font-size: 13px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
+
+    /* ── Table ── */
+    .table-wrap { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead th {
+      background: var(--red);
+      color: #fff;
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #fafafa; }
+    tbody td { padding: 13px 16px; vertical-align: middle; }
+
+    /* ── Cards (Mobile) ── */
+    .cards-wrap { display: none; flex-direction: column; gap: 12px; }
+    .atlet-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border-left: 5px solid var(--card-color, var(--red));
+    }
+    .card-head { padding: 14px 16px 10px; display: flex; align-items: flex-start; gap: 12px; }
+    .avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--card-color, var(--red)); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px; flex-shrink: 0;
+    }
+    .card-name { font-size: 16px; font-weight: 700; }
+    .card-meta { font-size: 13px; margin-top: 4px; }
+    .card-body {
+      padding: 0 16px 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .card-field { display: flex; flex-direction: column; gap: 2px; }
+    .field-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+    .field-val { font-size: 14px; font-weight: 500; }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-flex; align-items: center;
+      padding: 4px 10px; border-radius: 50px;
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .03em;
+    }
+    .badge-inkanas { background: #e3f0fb; color: var(--inkanas); }
+    .badge-lemkari { background: #e8f5e9; color: var(--lemkari); }
+    .badge-inkado  { background: #fff3e0; color: var(--inkado); }
+    .badge-forki   { background: #f3e5f5; color: var(--forki); }
+    .badge-default { background: #f5f5f5; color: #555; }
+
+    /* ── Loading ── */
+    #loading { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 4px solid var(--red-light); border-top-color: var(--red);
+      border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Error ── */
+    .error-box {
+      background: #fff3f3; border: 1.5px solid #ffcdd2; border-radius: var(--radius);
+      padding: 20px 24px; text-align: center; color: #c62828;
+    }
+    .error-box h3 { font-size: 16px; margin-bottom: 6px; }
+    .error-box p  { font-size: 14px; color: #666; }
+
+    /* ── Footer ── */
+    .tbl-footer {
+      padding: 10px 16px; border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--text-muted);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px;
+    }
+    .page-footer {
+      text-align: center; margin-top: 28px;
+      font-size: 12px; color: #aaa; line-height: 1.6;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .table-wrap  { display: none !important; }
+      .cards-wrap  { display: flex !important; }
+      .site-header { padding: 22px 16px 20px; }
+    }
+
+    /* ── Animations ── */
+    .fade-in { animation: fadeIn .3s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <span class="karate-icon">🥋</span>
+    <div class="header-badge">PORPROV KEPRI 2026</div>
+    <h1>Data Kontingen Karate</h1>
+    <p>Kepulauan Riau &nbsp;·&nbsp; Data diperbarui otomatis dari Google Spreadsheet</p>
+    <div class="sync-badge">
+      <div class="sync-dot"></div>
+      <span>Tersinkronisasi langsung dengan Google Sheets</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div id="loading">
+      <div class="spinner"></div>
+      <p style="font-size:15px;font-weight:500">Memuat data atlet...</p>
+      <small style="font-size:13px;color:#aaa">Mengambil data dari Google Spreadsheet</small>
+    </div>
+
+    <div id="mainContent" style="display:none">
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Cari nama atlet, kategori, nomor…" oninput="applyFilters()">
+        </div>
+        <div class="filter-btns" id="filterBtns"></div>
+        <span class="result-info" id="resultInfo"></span>
+      </div>
+
+      <!-- Table: Desktop -->
+      <div class="table-wrap" id="tableWrap">
+        <div class="table-scroll">
+          <table>
+            <thead id="tableHead"></thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+        <div class="tbl-footer" id="tblFooter"></div>
+      </div>
+
+      <!-- Cards: Mobile -->
+      <div class="cards-wrap" id="cardsWrap"></div>
+    </div>
+
+    <div id="errorBox" style="display:none"></div>
+
+    <div class="page-footer">
+      Data Kontingen Karate · PORPROV Kepulauan Riau 2026<br>
+      Diperbarui otomatis · Sumber: Google Sheets
+    </div>
+  </div>
+
+<script>
+  // ════════════════════════════════════════════════════
+  //  KONFIGURASI — ganti SHEET_CSV_URL dengan link CSV
+  //  Anda dari Google Sheets (lihat panduan)
+  // ════════════════════════════════════════════════════
+  var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1-EmtwwhANZM051cI4JYkZi08pDoOlDjSqGIsrbzpcCk/export?format=csv&gid=0';
+  //  Ganti angka gid=0 jika data ada di sheet lain
+  //  (lihat URL saat sheet tersebut aktif di Spreadsheet)
+
+  var ALL_DATA = { headers: [], rows: [], stats: {}, total: 0 };
+  var currentFilter = 'semua';
+
+  // ── CSV Parser (mendukung tanda kutip & koma dalam sel) ──
+  function parseCSV(text) {
+    var rows = [], cur = [], cell = '', inQ = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i], n = text[i+1];
+      if (inQ) {
+        if (c === '"' && n === '"') { cell += '"'; i++; }
+        else if (c === '"')         { inQ = false; }
+        else                         { cell += c; }
+      } else {
+        if      (c === '"')  { inQ = true; }
+        else if (c === ',')  { cur.push(cell.trim()); cell = ''; }
+        else if (c === '\n') { cur.push(cell.trim()); rows.push(cur); cur = []; cell = ''; }
+        else if (c === '\r') { /* skip */ }
+        else                  { cell += c; }
+      }
+    }
+    if (cell || cur.length) { cur.push(cell.trim()); rows.push(cur); }
+    return rows;
+  }
+
+  // ── Helpers ──
+  function getBadgeClass(val) {
+    var v = (val || '').toLowerCase();
+    if (v.includes('inkanas')) return 'badge-inkanas';
+    if (v.includes('lemkari')) return 'badge-lemkari';
+    if (v.includes('inkado'))  return 'badge-inkado';
+    if (v.includes('forki'))   return 'badge-forki';
+    return 'badge-default';
+  }
+  function getColor(val) {
+    var v = (val || '').toLowerCase();
+    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)' };
+    for (var k in map) if (v.includes(k)) return map[k];
+    return 'var(--red)';
+  }
+  function getAccent(key) {
+    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)' };
+    return map[(key||'').toLowerCase()] || 'var(--red)';
+  }
+  function getInitial(name) {
+    var p = (name||'').trim().split(' ').filter(Boolean);
+    return p.length >= 2 ? (p[0][0]+p[1][0]).toUpperCase() : (name+'  ').substr(0,2).toUpperCase();
+  }
+
+  // ── Render Stats ──
+  function renderStats(stats, total) {
+    var html = '<div class="stat-card fade-in" style="--accent:var(--red)">'
+             + '<div class="num">'+total+'</div><div class="lbl">Total Atlet</div></div>';
+    Object.keys(stats).sort().forEach(function(k) {
+      html += '<div class="stat-card fade-in" style="--accent:'+getAccent(k)+'">'
+            + '<div class="num">'+stats[k]+'</div><div class="lbl">'+k+'</div></div>';
+    });
+    document.getElementById('statsGrid').innerHTML = html;
+  }
+
+  // ── Render Filter Buttons ──
+  function renderFilterBtns(stats) {
+    var html = '<button class="filter-btn active" data-filter="semua" onclick="setFilter(this)">Semua</button>';
+    Object.keys(stats).sort().forEach(function(k) {
+      var slug  = k.toLowerCase();
+      var label = k.charAt(0).toUpperCase() + k.slice(1).toLowerCase();
+      html += '<button class="filter-btn" data-filter="'+slug+'" onclick="setFilter(this)">'+label+'</button>';
+    });
+    document.getElementById('filterBtns').innerHTML = html;
+  }
+
+  function setFilter(btn) {
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    currentFilter = btn.getAttribute('data-filter');
+    applyFilters();
+  }
+
+  // ── Apply Search + Filter ──
+  function applyFilters() {
+    var q = document.getElementById('searchInput').value.toLowerCase().trim();
+    var rows = ALL_DATA.rows.filter(function(row) {
+      var org = (row[ALL_DATA.orgIdx] || '').toLowerCase();
+      var matchFilter = currentFilter === 'semua' || org.includes(currentFilter);
+      var matchSearch = !q || row.some(function(c){ return c.toLowerCase().includes(q); });
+      return matchFilter && matchSearch;
+    });
+    renderTable(ALL_DATA.headers, rows);
+    renderCards(ALL_DATA.headers, rows);
+    document.getElementById('resultInfo').textContent =
+      'Menampilkan ' + rows.length + ' dari ' + ALL_DATA.total + ' atlet';
+  }
+
+  // ── Render Table ──
+  function renderTable(headers, rows) {
+    var orgIdx = ALL_DATA.orgIdx;
+    document.getElementById('tableHead').innerHTML =
+      '<tr>' + headers.map(function(h){ return '<th>'+h+'</th>'; }).join('') + '</tr>';
+
+    var tbody = '';
+    if (!rows.length) {
+      tbody = '<tr><td colspan="'+headers.length+'" style="text-align:center;padding:32px;color:#999">'
+            + '🔍 Tidak ada data yang sesuai</td></tr>';
+    } else {
+      rows.forEach(function(row, ri) {
+        tbody += '<tr class="fade-in" style="animation-delay:'+Math.min(ri*15,200)+'ms">';
+        row.forEach(function(cell, ci) {
+          tbody += ci === orgIdx
+            ? '<td><span class="badge '+getBadgeClass(cell)+'">'+cell+'</span></td>'
+            : '<td>'+(cell||'–')+'</td>';
+        });
+        tbody += '</tr>';
+      });
+    }
+    document.getElementById('tableBody').innerHTML = tbody;
+    document.getElementById('tblFooter').innerHTML =
+      '<span>Total: <strong>'+rows.length+' atlet</strong></span>'
+      + '<span>Sumber: Google Sheets · Diperbarui otomatis</span>';
+  }
+
+  // ── Render Cards ──
+  function renderCards(headers, rows) {
+    var nameIdx = ALL_DATA.nameIdx, orgIdx = ALL_DATA.orgIdx;
+    var wrap = document.getElementById('cardsWrap');
+    if (!rows.length) {
+      wrap.innerHTML = '<div style="text-align:center;padding:48px;color:#aaa"><p style="font-size:15px">🔍 Tidak ada data yang sesuai</p></div>';
+      return;
+    }
+    var html = '';
+    rows.forEach(function(row, ri) {
+      var name  = row[nameIdx] || '–';
+      var org   = row[orgIdx]  || '';
+      var color = getColor(org);
+      html += '<div class="atlet-card fade-in" style="--card-color:'+color+';animation-delay:'+Math.min(ri*20,300)+'ms">';
+      html += '<div class="card-head"><div class="avatar">'+getInitial(name)+'</div>'
+            + '<div><div class="card-name">'+name+'</div>'
+            + '<div class="card-meta"><span class="badge '+getBadgeClass(org)+'">'+org+'</span></div>'
+            + '</div></div>';
+      html += '<div class="card-body">';
+      headers.forEach(function(h, ci) {
+        if (ci === nameIdx || ci === orgIdx) return;
+        html += '<div class="card-field"><span class="field-lbl">'+h+'</span>'
+              + '<span class="field-val">'+(row[ci]||'–')+'</span></div>';
+      });
+      html += '</div></div>';
+    });
+    wrap.innerHTML = html;
+  }
+
+  // ── Ambil & Proses CSV ──
+  function loadData() {
+    // Tambahkan timestamp agar browser tidak cache data lama
+    var url = SHEET_CSV_URL + '&t=' + Date.now();
+    fetch(url)
+      .then(function(res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.text();
+      })
+      .then(function(csv) {
+        var parsed  = parseCSV(csv);
+        var headers = parsed[0] || [];
+        var rows    = parsed.slice(1).filter(function(r){ return r.some(function(c){ return c.trim(); }); });
+
+        // Deteksi kolom nama & perguruan
+        var nameIdx = headers.findIndex(function(h){ return /nama/i.test(h); });
+        var orgIdx  = headers.findIndex(function(h){ return /perguruan|organisasi|klub/i.test(h); });
+        if (nameIdx < 0) nameIdx = 1;
+        if (orgIdx  < 0) orgIdx  = 2;
+
+        // Hitung statistik
+        var stats = {};
+        rows.forEach(function(row) {
+          var p = (row[orgIdx] || '').trim().toUpperCase();
+          if (p) stats[p] = (stats[p] || 0) + 1;
+        });
+
+        ALL_DATA = { headers: headers, rows: rows, stats: stats, total: rows.length, nameIdx: nameIdx, orgIdx: orgIdx };
+
+        document.getElementById('loading').style.display     = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+
+        renderStats(stats, rows.length);
+        renderFilterBtns(stats);
+        renderTable(headers, rows);
+        renderCards(headers, rows);
+        document.getElementById('resultInfo').textContent = 'Menampilkan ' + rows.length + ' atlet';
+      })
+      .catch(function(err) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('errorBox').style.display = 'block';
+        document.getElementById('errorBox').innerHTML =
+          '<div class="error-box">'
+          + '<h3>⚠️ Gagal Memuat Data</h3>'
+          + '<p>Pastikan Google Spreadsheet sudah dipublikasikan ke web.<br>'
+          + '<small style="color:#e53935">'+err.message+'</small></p>'
+          + '<button onclick="loadData()" style="margin-top:12px;padding:8px 20px;background:var(--red);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer">🔄 Coba Lagi</button>'
+          + '</div>';
+      });
+  }
+
+  loadData();
+</script>
+</body>
+</html>
