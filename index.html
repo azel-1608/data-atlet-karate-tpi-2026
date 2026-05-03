@@ -26,6 +26,7 @@
       --forki:      #6a1b9a;
       --inkai:      #00838f;
       --gokasi:     #bf360c;
+      --gojukai:    #00695c;
     }
 
     body {
@@ -170,6 +171,7 @@
     .filter-btn[data-filter="forki"].active   { background: var(--forki);   border-color: var(--forki);   color: #fff; }
     .filter-btn[data-filter="inkai"].active   { background: var(--inkai);   border-color: var(--inkai);   color: #fff; }
     .filter-btn[data-filter="gokasi"].active  { background: var(--gokasi);  border-color: var(--gokasi);  color: #fff; }
+    .filter-btn[data-filter="gojukai"].active { background: var(--gojukai); border-color: var(--gojukai); color: #fff; }
     .result-info { font-size: 13px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
 
     /* ── Table ── */
@@ -233,6 +235,7 @@
     .badge-forki   { background: #f3e5f5; color: var(--forki); }
     .badge-inkai   { background: #e0f5f6; color: var(--inkai); }
     .badge-gokasi  { background: #fbe9e7; color: var(--gokasi); }
+    .badge-gojukai { background: #e0f2f1; color: var(--gojukai); }
     .badge-default { background: #f5f5f5; color: #555; }
 
     /* ── Loading ── */
@@ -334,18 +337,11 @@
   </div>
 
 <script>
-  // ════════════════════════════════════════════════════
-  //  KONFIGURASI — ganti SHEET_CSV_URL dengan link CSV
-  //  Anda dari Google Sheets (lihat panduan)
-  // ════════════════════════════════════════════════════
   var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS9tuQQhDgJulXrJA-N4agG9HSGCxY4ObT-wEqZjyzweiWSGNlokE5usiR76miWVzm1eheLpJ-KzOvQ/pub?gid=1596301256&single=true&output=csv';
-  //  Ganti angka gid=0 jika data ada di sheet lain
-  //  (lihat URL saat sheet tersebut aktif di Spreadsheet)
 
   var ALL_DATA = { headers: [], rows: [], stats: {}, total: 0 };
   var currentFilter = 'semua';
 
-  // ── CSV Parser (mendukung tanda kutip & koma dalam sel) ──
   function parseCSV(text) {
     var rows = [], cur = [], cell = '', inQ = false;
     for (var i = 0; i < text.length; i++) {
@@ -366,7 +362,6 @@
     return rows;
   }
 
-  // ── Helpers ──
   function getBadgeClass(val) {
     var v = (val || '').toLowerCase();
     if (v.includes('inkanas')) return 'badge-inkanas';
@@ -375,16 +370,17 @@
     if (v.includes('forki'))   return 'badge-forki';
     if (v.includes('inkai'))   return 'badge-inkai';
     if (v.includes('gokasi'))  return 'badge-gokasi';
+    if (v.includes('gojukai')) return 'badge-gojukai';
     return 'badge-default';
   }
   function getColor(val) {
     var v = (val || '').toLowerCase();
-    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)', inkai:'var(--inkai)', gokasi:'var(--gokasi)' };
+    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)', inkai:'var(--inkai)', gokasi:'var(--gokasi)', gojukai:'var(--gojukai)' };
     for (var k in map) if (v.includes(k)) return map[k];
     return 'var(--red)';
   }
   function getAccent(key) {
-    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)', inkai:'var(--inkai)', gokasi:'var(--gokasi)' };
+    var map = { inkanas:'var(--inkanas)', lemkari:'var(--lemkari)', inkado:'var(--inkado)', forki:'var(--forki)', inkai:'var(--inkai)', gokasi:'var(--gokasi)', gojukai:'var(--gojukai)' };
     return map[(key||'').toLowerCase()] || 'var(--red)';
   }
   function getInitial(name) {
@@ -392,7 +388,6 @@
     return p.length >= 2 ? (p[0][0]+p[1][0]).toUpperCase() : (name+'  ').substr(0,2).toUpperCase();
   }
 
-  // ── Render Stats ──
   function renderStats(stats, total) {
     var html = '<div class="stat-card fade-in" style="--accent:var(--red)">'
              + '<div class="num">'+total+'</div><div class="lbl">Total Atlet</div></div>';
@@ -403,7 +398,6 @@
     document.getElementById('statsGrid').innerHTML = html;
   }
 
-  // ── Render Filter Buttons ──
   function renderFilterBtns(stats) {
     var html = '<button class="filter-btn active" data-filter="semua" onclick="setFilter(this)">Semua</button>';
     Object.keys(stats).sort().forEach(function(k) {
@@ -421,7 +415,6 @@
     applyFilters();
   }
 
-  // ── Apply Search + Filter ──
   function applyFilters() {
     var q = document.getElementById('searchInput').value.toLowerCase().trim();
     var rows = ALL_DATA.rows.filter(function(row) {
@@ -436,12 +429,10 @@
       'Menampilkan ' + rows.length + ' dari ' + ALL_DATA.total + ' atlet';
   }
 
-  // ── Render Table ──
   function renderTable(headers, rows) {
     var orgIdx = ALL_DATA.orgIdx;
     document.getElementById('tableHead').innerHTML =
       '<tr>' + headers.map(function(h){ return '<th>'+h+'</th>'; }).join('') + '</tr>';
-
     var tbody = '';
     if (!rows.length) {
       tbody = '<tr><td colspan="'+headers.length+'" style="text-align:center;padding:32px;color:#999">'
@@ -463,7 +454,6 @@
       + '<span>Sumber: Google Sheets · Diperbarui otomatis</span>';
   }
 
-  // ── Render Cards ──
   function renderCards(headers, rows) {
     var nameIdx = ALL_DATA.nameIdx, orgIdx = ALL_DATA.orgIdx;
     var wrap = document.getElementById('cardsWrap');
@@ -492,9 +482,7 @@
     wrap.innerHTML = html;
   }
 
-  // ── Ambil & Proses CSV ──
   function loadData() {
-    // Tambahkan timestamp agar browser tidak cache data lama
     var url = SHEET_CSV_URL + '&t=' + Date.now();
     fetch(url)
       .then(function(res) {
@@ -505,25 +493,18 @@
         var parsed  = parseCSV(csv);
         var headers = parsed[0] || [];
         var rows    = parsed.slice(1).filter(function(r){ return r.some(function(c){ return c.trim(); }); });
-
-        // Deteksi kolom nama & perguruan
         var nameIdx = headers.findIndex(function(h){ return /nama/i.test(h); });
         var orgIdx  = headers.findIndex(function(h){ return /perguruan|organisasi|klub/i.test(h); });
         if (nameIdx < 0) nameIdx = 1;
         if (orgIdx  < 0) orgIdx  = 2;
-
-        // Hitung statistik
         var stats = {};
         rows.forEach(function(row) {
           var p = (row[orgIdx] || '').trim().toUpperCase();
           if (p) stats[p] = (stats[p] || 0) + 1;
         });
-
         ALL_DATA = { headers: headers, rows: rows, stats: stats, total: rows.length, nameIdx: nameIdx, orgIdx: orgIdx };
-
         document.getElementById('loading').style.display     = 'none';
         document.getElementById('mainContent').style.display = 'block';
-
         renderStats(stats, rows.length);
         renderFilterBtns(stats);
         renderTable(headers, rows);
