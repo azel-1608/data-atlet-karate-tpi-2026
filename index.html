@@ -431,16 +431,19 @@
 
   function renderTable(headers, rows) {
     var orgIdx = ALL_DATA.orgIdx;
+    var hidden = ALL_DATA.hiddenIdx || new Set();
+    var visHeaders = headers.filter(function(_, i){ return !hidden.has(i); });
     document.getElementById('tableHead').innerHTML =
-      '<tr>' + headers.map(function(h){ return '<th>'+h+'</th>'; }).join('') + '</tr>';
+      '<tr>' + visHeaders.map(function(h){ return '<th>'+h+'</th>'; }).join('') + '</tr>';
     var tbody = '';
     if (!rows.length) {
-      tbody = '<tr><td colspan="'+headers.length+'" style="text-align:center;padding:32px;color:#999">'
+      tbody = '<tr><td colspan="'+visHeaders.length+'" style="text-align:center;padding:32px;color:#999">'
             + '🔍 Tidak ada data yang sesuai</td></tr>';
     } else {
       rows.forEach(function(row, ri) {
         tbody += '<tr class="fade-in" style="animation-delay:'+Math.min(ri*15,200)+'ms">';
         row.forEach(function(cell, ci) {
+          if (hidden.has(ci)) return;
           tbody += ci === orgIdx
             ? '<td><span class="badge '+getBadgeClass(cell)+'">'+cell+'</span></td>'
             : '<td>'+(cell||'–')+'</td>';
@@ -474,6 +477,7 @@
       html += '<div class="card-body">';
       headers.forEach(function(h, ci) {
         if (ci === nameIdx || ci === orgIdx) return;
+        if ((ALL_DATA.hiddenIdx || new Set()).has(ci)) return;
         html += '<div class="card-field"><span class="field-lbl">'+h+'</span>'
               + '<span class="field-val">'+(row[ci]||'–')+'</span></div>';
       });
@@ -497,12 +501,19 @@
         var orgIdx  = headers.findIndex(function(h){ return /perguruan|organisasi|klub/i.test(h); });
         if (nameIdx < 0) nameIdx = 1;
         if (orgIdx  < 0) orgIdx  = 2;
+
+        // Kolom yang disembunyikan di tampilan (header tepat = "kelas")
+        var hiddenIdx = new Set();
+        headers.forEach(function(h, i) {
+          if (h.trim().toLowerCase() === 'kelas') hiddenIdx.add(i);
+        });
+
         var stats = {};
         rows.forEach(function(row) {
           var p = (row[orgIdx] || '').trim().toUpperCase();
           if (p) stats[p] = (stats[p] || 0) + 1;
         });
-        ALL_DATA = { headers: headers, rows: rows, stats: stats, total: rows.length, nameIdx: nameIdx, orgIdx: orgIdx };
+        ALL_DATA = { headers: headers, rows: rows, stats: stats, total: rows.length, nameIdx: nameIdx, orgIdx: orgIdx, hiddenIdx: hiddenIdx };
         document.getElementById('loading').style.display     = 'none';
         document.getElementById('mainContent').style.display = 'block';
         renderStats(stats, rows.length);
