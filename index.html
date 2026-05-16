@@ -27,111 +27,59 @@
       --inkai:      #00838f;
       --gokasi:     #bf360c;
       --gojukai:    #00695c;
+      --putra:      #1565c0;
+      --putri:      #ad1457;
     }
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
     /* ── Header ── */
     .site-header {
       background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 60%, #e53935 100%);
-      color: #fff;
-      padding: 28px 20px 24px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      color: #fff; padding: 28px 20px 24px; text-align: center; position: relative; overflow: hidden;
     }
     .site-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
     }
     .header-badge {
-      display: inline-block;
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.3);
-      border-radius: 50px;
-      padding: 4px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+      display: inline-block; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50px; padding: 4px 14px; font-size: 12px; font-weight: 600;
+      letter-spacing: .05em; text-transform: uppercase; margin-bottom: 10px;
     }
-    .site-header h1 {
-      font-size: clamp(18px, 5vw, 28px);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 4px;
-    }
-    .site-header p { font-size: 14px; opacity: .8; margin-top: 6px; }
-    .karate-icon {
-      font-size: 36px;
-      margin-bottom: 8px;
-      display: block;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,.3));
-    }
+    .site-header h1 { font-size: clamp(18px, 5vw, 28px); font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+    .site-header p  { font-size: 14px; opacity: .8; margin-top: 6px; }
+    .karate-icon    { font-size: 36px; margin-bottom: 8px; display: block; filter: drop-shadow(0 2px 6px rgba(0,0,0,.3)); }
     .sync-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 50px;
-      padding: 4px 12px;
-      font-size: 12px;
-      margin-top: 10px;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50px; padding: 4px 12px; font-size: 12px; margin-top: 10px;
     }
-    .sync-dot {
-      width: 7px; height: 7px;
-      background: #69f0ae;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: .5; transform: scale(.8); }
-    }
+    .sync-dot { width: 7px; height: 7px; background: #69f0ae; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
 
     /* ── Container ── */
     .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; }
 
     /* ── Stats ── */
     .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px; margin-bottom: 24px;
     }
     .stat-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 16px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      border-top: 4px solid var(--accent, var(--red));
-      transition: transform .15s;
+      background: var(--surface); border-radius: var(--radius); padding: 16px;
+      text-align: center; box-shadow: var(--shadow);
+      border-top: 4px solid var(--accent, var(--red)); transition: transform .15s;
     }
     .stat-card:hover { transform: translateY(-2px); }
-    .stat-card .num  { font-size: 32px; font-weight: 800; color: var(--accent, var(--red)); line-height: 1; }
-    .stat-card .lbl  { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+    .stat-card .num { font-size: 32px; font-weight: 800; color: var(--accent, var(--red)); line-height: 1; }
+    .stat-card .lbl { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
 
-    /* ── Toolbar ── */
+    /* ── Toolbar (Perguruan) ── */
     .toolbar {
-      background: var(--surface);
-      border-radius: var(--radius);
-      padding: 14px 16px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
+      background: var(--surface); border-radius: var(--radius); padding: 14px 16px;
+      margin-bottom: 12px; box-shadow: var(--shadow);
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
     }
     .search-wrap { position: relative; flex: 1; min-width: 180px; }
     .search-wrap svg {
@@ -139,30 +87,16 @@
       width: 16px; height: 16px; color: var(--text-muted); pointer-events: none;
     }
     .search-wrap input {
-      width: 100%;
-      padding: 10px 12px 10px 38px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 15px;
-      font-family: inherit;
-      outline: none;
-      transition: border-color .2s;
-      background: #fff;
+      width: 100%; padding: 10px 12px 10px 38px; border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 15px; font-family: inherit; outline: none;
+      transition: border-color .2s; background: #fff;
     }
     .search-wrap input:focus { border-color: var(--red); }
     .filter-btns { display: flex; gap: 6px; flex-wrap: wrap; }
     .filter-btn {
-      padding: 8px 14px;
-      border-radius: 50px;
-      border: 1.5px solid var(--border);
-      background: #fff;
-      font-size: 13px;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all .15s;
-      white-space: nowrap;
-      color: var(--text);
+      padding: 8px 14px; border-radius: 50px; border: 1.5px solid var(--border);
+      background: #fff; font-size: 13px; font-weight: 600; font-family: inherit;
+      cursor: pointer; transition: all .15s; white-space: nowrap; color: var(--text);
     }
     .filter-btn[data-filter="semua"].active   { background: var(--red);     border-color: var(--red);     color: #fff; }
     .filter-btn[data-filter="inkanas"].active { background: var(--inkanas); border-color: var(--inkanas); color: #fff; }
@@ -174,20 +108,61 @@
     .filter-btn[data-filter="gojukai"].active { background: var(--gojukai); border-color: var(--gojukai); color: #fff; }
     .result-info { font-size: 13px; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
 
+    /* ── Kelas Filter Toolbar ── */
+    .kelas-toolbar {
+      background: var(--surface); border-radius: var(--radius); padding: 14px 16px;
+      margin-bottom: 16px; box-shadow: var(--shadow);
+    }
+    .kelas-toolbar-header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+    }
+    .kelas-toolbar-title {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--text-muted);
+    }
+    .kelas-group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .kelas-divider {
+      width: 100%; height: 1px; background: var(--border); margin: 6px 0;
+    }
+    .kelas-group-label {
+      font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+      padding: 3px 8px; border-radius: 4px; white-space: nowrap;
+    }
+    .kelas-group-label.putra { background: #e3f0fb; color: var(--putra); }
+    .kelas-group-label.putri { background: #fce4ec; color: var(--putri); }
+
+    .kelas-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 8px; border: 1.5px solid var(--border);
+      background: #fff; font-size: 12px; font-weight: 600; font-family: inherit;
+      cursor: pointer; transition: all .15s; white-space: nowrap; color: var(--text);
+    }
+    .kelas-btn .kc {
+      background: #f0f0f0; color: #666; padding: 1px 7px;
+      border-radius: 50px; font-size: 11px; font-weight: 700;
+      transition: all .15s;
+    }
+    /* Semua */
+    .kelas-btn.semua.active { background: var(--red); border-color: var(--red); color: #fff; }
+    .kelas-btn.semua.active .kc { background: rgba(255,255,255,.25); color: #fff; }
+    /* Putra */
+    .kelas-btn.putra { border-color: #bbdefb; }
+    .kelas-btn.putra:hover:not(.active) { background: #e3f0fb; border-color: var(--putra); color: var(--putra); }
+    .kelas-btn.putra.active { background: var(--putra); border-color: var(--putra); color: #fff; }
+    .kelas-btn.putra.active .kc { background: rgba(255,255,255,.25); color: #fff; }
+    /* Putri */
+    .kelas-btn.putri { border-color: #f8bbd0; }
+    .kelas-btn.putri:hover:not(.active) { background: #fce4ec; border-color: var(--putri); color: var(--putri); }
+    .kelas-btn.putri.active { background: var(--putri); border-color: var(--putri); color: #fff; }
+    .kelas-btn.putri.active .kc { background: rgba(255,255,255,.25); color: #fff; }
+
     /* ── Table ── */
     .table-wrap { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
     .table-scroll { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
     thead th {
-      background: var(--red);
-      color: #fff;
-      padding: 14px 16px;
-      text-align: left;
-      font-weight: 700;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      white-space: nowrap;
+      background: var(--red); color: #fff; padding: 14px 16px; text-align: left;
+      font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap;
     }
     tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
     tbody tr:last-child { border-bottom: none; }
@@ -197,10 +172,8 @@
     /* ── Cards (Mobile) ── */
     .cards-wrap { display: none; flex-direction: column; gap: 12px; }
     .atlet-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden;
       border-left: 5px solid var(--card-color, var(--red));
     }
     .card-head { padding: 14px 16px 10px; display: flex; align-items: flex-start; gap: 12px; }
@@ -211,23 +184,16 @@
       font-weight: 800; font-size: 16px; flex-shrink: 0;
     }
     .card-name { font-size: 16px; font-weight: 700; }
-    .card-meta { font-size: 13px; margin-top: 4px; }
-    .card-body {
-      padding: 0 16px 14px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
+    .card-meta { font-size: 13px; margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px; }
+    .card-body { padding: 0 16px 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .card-field { display: flex; flex-direction: column; gap: 2px; }
     .field-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
     .field-val { font-size: 14px; font-weight: 500; }
 
     /* ── Badges ── */
     .badge {
-      display: inline-flex; align-items: center;
-      padding: 4px 10px; border-radius: 50px;
-      font-size: 12px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .03em;
+      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 50px;
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
     }
     .badge-inkanas { background: #e3f0fb; color: var(--inkanas); }
     .badge-lemkari { background: #e8f5e9; color: var(--lemkari); }
@@ -237,12 +203,13 @@
     .badge-gokasi  { background: #fbe9e7; color: var(--gokasi); }
     .badge-gojukai { background: #e0f2f1; color: var(--gojukai); }
     .badge-default { background: #f5f5f5; color: #555; }
+    .badge-kelas-putra { background: #e3f0fb; color: var(--putra); }
+    .badge-kelas-putri { background: #fce4ec; color: var(--putri); }
 
     /* ── Loading ── */
     #loading { text-align: center; padding: 60px 20px; color: var(--text-muted); }
     .spinner {
-      width: 40px; height: 40px;
-      border: 4px solid var(--red-light); border-top-color: var(--red);
+      width: 40px; height: 40px; border: 4px solid var(--red-light); border-top-color: var(--red);
       border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 16px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -261,10 +228,7 @@
       font-size: 13px; color: var(--text-muted);
       display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px;
     }
-    .page-footer {
-      text-align: center; margin-top: 28px;
-      font-size: 12px; color: #aaa; line-height: 1.6;
-    }
+    .page-footer { text-align: center; margin-top: 28px; font-size: 12px; color: #aaa; line-height: 1.6; }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -302,6 +266,7 @@
     <div id="mainContent" style="display:none">
       <div class="stats-grid" id="statsGrid"></div>
 
+      <!-- Filter Perguruan -->
       <div class="toolbar">
         <div class="search-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -311,6 +276,17 @@
         </div>
         <div class="filter-btns" id="filterBtns"></div>
         <span class="result-info" id="resultInfo"></span>
+      </div>
+
+      <!-- Filter Kelas Pertandingan -->
+      <div class="kelas-toolbar">
+        <div class="kelas-toolbar-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--text-muted)">
+            <path d="M3 6h18M7 12h10M10 18h4"/>
+          </svg>
+          <span class="kelas-toolbar-title">Filter Kelas Pertandingan</span>
+        </div>
+        <div id="kelasBtns"></div>
       </div>
 
       <!-- Table: Desktop -->
@@ -339,9 +315,32 @@
 <script>
   var SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS9tuQQhDgJulXrJA-N4agG9HSGCxY4ObT-wEqZjyzweiWSGNlokE5usiR76miWVzm1eheLpJ-KzOvQ/pub?gid=1596301256&single=true&output=csv';
 
-  var ALL_DATA = { headers: [], rows: [], stats: {}, total: 0 };
-  var currentFilter = 'semua';
+  // Urutan & nama resmi kelas pertandingan
+  var KELAS_ORDER = [
+    { label: 'Kumite Under 55 kg Putra',  gender: 'putra' },
+    { label: 'Kumite Under 60 kg Putra',  gender: 'putra' },
+    { label: 'Kumite Under 67 kg Putra',  gender: 'putra' },
+    { label: 'Kumite Under 75 kg Putra',  gender: 'putra' },
+    { label: 'Kumite Under 84 kg Putra',  gender: 'putra' },
+    { label: 'Kumite Over 84 kg Putra',   gender: 'putra' },
+    { label: 'Kata Perorangan Putra',     gender: 'putra' },
+    { label: 'Kata Beregu Putra',         gender: 'putra' },
+    { label: 'Kumite Beregu Putra',       gender: 'putra' },
+    { label: 'Kumite Under 50 kg Putri',  gender: 'putri' },
+    { label: 'Kumite Under 55 kg Putri',  gender: 'putri' },
+    { label: 'Kumite Under 61 kg Putri',  gender: 'putri' },
+    { label: 'Kumite Under 68 kg Putri',  gender: 'putri' },
+    { label: 'Kumite Over 68 kg Putri',   gender: 'putri' },
+    { label: 'Kata Perorangan Putri',     gender: 'putri' },
+    { label: 'Kata Beregu Putri',         gender: 'putri' },
+    { label: 'Kumite Beregu Putri',       gender: 'putri' }
+  ];
 
+  var ALL_DATA     = { headers: [], rows: [], stats: {}, total: 0 };
+  var currentFilter = 'semua';
+  var currentKelas  = 'semua';
+
+  // ── CSV Parser ──
   function parseCSV(text) {
     var rows = [], cur = [], cell = '', inQ = false;
     for (var i = 0; i < text.length; i++) {
@@ -362,6 +361,7 @@
     return rows;
   }
 
+  // ── Helpers ──
   function getBadgeClass(val) {
     var v = (val || '').toLowerCase();
     if (v.includes('inkanas')) return 'badge-inkanas';
@@ -371,6 +371,12 @@
     if (v.includes('inkai'))   return 'badge-inkai';
     if (v.includes('gokasi'))  return 'badge-gokasi';
     if (v.includes('gojukai')) return 'badge-gojukai';
+    return 'badge-default';
+  }
+  function getKelasBadgeClass(val) {
+    var v = (val || '').toLowerCase();
+    if (v.includes('putri')) return 'badge-kelas-putri';
+    if (v.includes('putra')) return 'badge-kelas-putra';
     return 'badge-default';
   }
   function getColor(val) {
@@ -388,6 +394,7 @@
     return p.length >= 2 ? (p[0][0]+p[1][0]).toUpperCase() : (name+'  ').substr(0,2).toUpperCase();
   }
 
+  // ── Render Stats (Perguruan) ──
   function renderStats(stats, total) {
     var html = '<div class="stat-card fade-in" style="--accent:var(--red)">'
              + '<div class="num">'+total+'</div><div class="lbl">Total Atlet</div></div>';
@@ -398,6 +405,7 @@
     document.getElementById('statsGrid').innerHTML = html;
   }
 
+  // ── Render Filter Perguruan ──
   function renderFilterBtns(stats) {
     var html = '<button class="filter-btn active" data-filter="semua" onclick="setFilter(this)">Semua</button>';
     Object.keys(stats).sort().forEach(function(k) {
@@ -408,6 +416,45 @@
     document.getElementById('filterBtns').innerHTML = html;
   }
 
+  // ── Render Filter Kelas ──
+  function renderKelasBtns(kelasCounts) {
+    var totalAll = ALL_DATA.total;
+    var html = '';
+
+    // Tombol "Semua Kelas"
+    html += '<div class="kelas-group" style="margin-bottom:8px">'
+          + '<button class="kelas-btn semua active" data-kelas="semua" onclick="setKelas(this)">'
+          + 'Semua Kelas <span class="kc">'+totalAll+'</span></button>'
+          + '</div>';
+
+    // Grup PUTRA
+    html += '<div class="kelas-group">'
+          + '<span class="kelas-group-label putra">⚔ Putra</span>';
+    KELAS_ORDER.forEach(function(k) {
+      if (k.gender !== 'putra') return;
+      var count = kelasCounts[k.label] || 0;
+      html += '<button class="kelas-btn putra" data-kelas="'+k.label+'" onclick="setKelas(this)">'
+            + k.label + ' <span class="kc">'+count+'</span></button>';
+    });
+    html += '</div>';
+
+    // Pemisah
+    html += '<div class="kelas-divider"></div>';
+
+    // Grup PUTRI
+    html += '<div class="kelas-group">'
+          + '<span class="kelas-group-label putri">🌸 Putri</span>';
+    KELAS_ORDER.forEach(function(k) {
+      if (k.gender !== 'putri') return;
+      var count = kelasCounts[k.label] || 0;
+      html += '<button class="kelas-btn putri" data-kelas="'+k.label+'" onclick="setKelas(this)">'
+            + k.label + ' <span class="kc">'+count+'</span></button>';
+    });
+    html += '</div>';
+
+    document.getElementById('kelasBtns').innerHTML = html;
+  }
+
   function setFilter(btn) {
     document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
     btn.classList.add('active');
@@ -415,13 +462,23 @@
     applyFilters();
   }
 
+  function setKelas(btn) {
+    document.querySelectorAll('.kelas-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    currentKelas = btn.getAttribute('data-kelas');
+    applyFilters();
+  }
+
+  // ── Apply Filters (Perguruan + Kelas + Search) ──
   function applyFilters() {
     var q = document.getElementById('searchInput').value.toLowerCase().trim();
     var rows = ALL_DATA.rows.filter(function(row) {
-      var org = (row[ALL_DATA.orgIdx] || '').toLowerCase();
+      var org   = (row[ALL_DATA.orgIdx]   || '').toLowerCase();
+      var kelas = (row[ALL_DATA.kelasIdx] || '').trim();
       var matchFilter = currentFilter === 'semua' || org.includes(currentFilter);
+      var matchKelas  = currentKelas  === 'semua' || kelas === currentKelas;
       var matchSearch = !q || row.some(function(c){ return c.toLowerCase().includes(q); });
-      return matchFilter && matchSearch;
+      return matchFilter && matchKelas && matchSearch;
     });
     renderTable(ALL_DATA.headers, rows);
     renderCards(ALL_DATA.headers, rows);
@@ -429,12 +486,16 @@
       'Menampilkan ' + rows.length + ' dari ' + ALL_DATA.total + ' atlet';
   }
 
+  // ── Render Table ──
   function renderTable(headers, rows) {
-    var orgIdx = ALL_DATA.orgIdx;
-    var hidden = ALL_DATA.hiddenIdx || new Set();
+    var orgIdx   = ALL_DATA.orgIdx;
+    var kelasIdx = ALL_DATA.kelasIdx;
+    var hidden   = ALL_DATA.hiddenIdx || new Set();
     var visHeaders = headers.filter(function(_, i){ return !hidden.has(i); });
+
     document.getElementById('tableHead').innerHTML =
       '<tr>' + visHeaders.map(function(h){ return '<th>'+h+'</th>'; }).join('') + '</tr>';
+
     var tbody = '';
     if (!rows.length) {
       tbody = '<tr><td colspan="'+visHeaders.length+'" style="text-align:center;padding:32px;color:#999">'
@@ -444,9 +505,13 @@
         tbody += '<tr class="fade-in" style="animation-delay:'+Math.min(ri*15,200)+'ms">';
         row.forEach(function(cell, ci) {
           if (hidden.has(ci)) return;
-          tbody += ci === orgIdx
-            ? '<td><span class="badge '+getBadgeClass(cell)+'">'+cell+'</span></td>'
-            : '<td>'+(cell||'–')+'</td>';
+          if (ci === orgIdx) {
+            tbody += '<td><span class="badge '+getBadgeClass(cell)+'">'+cell+'</span></td>';
+          } else if (ci === kelasIdx) {
+            tbody += '<td><span class="badge '+getKelasBadgeClass(cell)+'" style="font-size:11px">'+( cell||'–')+'</span></td>';
+          } else {
+            tbody += '<td>'+(cell||'–')+'</td>';
+          }
         });
         tbody += '</tr>';
       });
@@ -457,27 +522,37 @@
       + '<span>Sumber: Google Sheets · Diperbarui otomatis</span>';
   }
 
+  // ── Render Cards ──
   function renderCards(headers, rows) {
-    var nameIdx = ALL_DATA.nameIdx, orgIdx = ALL_DATA.orgIdx;
+    var nameIdx  = ALL_DATA.nameIdx;
+    var orgIdx   = ALL_DATA.orgIdx;
+    var kelasIdx = ALL_DATA.kelasIdx;
+    var hidden   = ALL_DATA.hiddenIdx || new Set();
     var wrap = document.getElementById('cardsWrap');
+
     if (!rows.length) {
       wrap.innerHTML = '<div style="text-align:center;padding:48px;color:#aaa"><p style="font-size:15px">🔍 Tidak ada data yang sesuai</p></div>';
       return;
     }
     var html = '';
     rows.forEach(function(row, ri) {
-      var name  = row[nameIdx] || '–';
-      var org   = row[orgIdx]  || '';
+      var name  = row[nameIdx]  || '–';
+      var org   = row[orgIdx]   || '';
+      var kelas = row[kelasIdx] || '';
       var color = getColor(org);
+
       html += '<div class="atlet-card fade-in" style="--card-color:'+color+';animation-delay:'+Math.min(ri*20,300)+'ms">';
       html += '<div class="card-head"><div class="avatar">'+getInitial(name)+'</div>'
             + '<div><div class="card-name">'+name+'</div>'
-            + '<div class="card-meta"><span class="badge '+getBadgeClass(org)+'">'+org+'</span></div>'
-            + '</div></div>';
+            + '<div class="card-meta">'
+            + '<span class="badge '+getBadgeClass(org)+'">'+org+'</span>'
+            + (kelas ? '<span class="badge '+getKelasBadgeClass(kelas)+'" style="font-size:11px">'+kelas+'</span>' : '')
+            + '</div></div></div>';
+
       html += '<div class="card-body">';
       headers.forEach(function(h, ci) {
-        if (ci === nameIdx || ci === orgIdx) return;
-        if ((ALL_DATA.hiddenIdx || new Set()).has(ci)) return;
+        if (ci === nameIdx || ci === orgIdx || ci === kelasIdx) return;
+        if (hidden.has(ci)) return;
         html += '<div class="card-field"><span class="field-lbl">'+h+'</span>'
               + '<span class="field-val">'+(row[ci]||'–')+'</span></div>';
       });
@@ -486,6 +561,7 @@
     wrap.innerHTML = html;
   }
 
+  // ── Load Data ──
   function loadData() {
     var url = SHEET_CSV_URL + '&t=' + Date.now();
     fetch(url)
@@ -497,27 +573,47 @@
         var parsed  = parseCSV(csv);
         var headers = parsed[0] || [];
         var rows    = parsed.slice(1).filter(function(r){ return r.some(function(c){ return c.trim(); }); });
-        var nameIdx = headers.findIndex(function(h){ return /nama/i.test(h); });
-        var orgIdx  = headers.findIndex(function(h){ return /perguruan|organisasi|klub/i.test(h); });
-        if (nameIdx < 0) nameIdx = 1;
-        if (orgIdx  < 0) orgIdx  = 2;
 
-        // Kolom yang disembunyikan di tampilan (header tepat = "kelas")
+        // Deteksi kolom utama
+        var nameIdx  = headers.findIndex(function(h){ return /nama/i.test(h); });
+        var orgIdx   = headers.findIndex(function(h){ return /perguruan|organisasi|klub/i.test(h); });
+        // Kelas PORPROV = kolom kelas yang bukan tepat "KELAS"
+        var kelasIdx = headers.findIndex(function(h){ return /kelas/i.test(h) && h.trim().toLowerCase() !== 'kelas'; });
+
+        if (nameIdx  < 0) nameIdx  = 1;
+        if (orgIdx   < 0) orgIdx   = 2;
+
+        // Kolom tersembunyi (tepat "KELAS")
         var hiddenIdx = new Set();
         headers.forEach(function(h, i) {
           if (h.trim().toLowerCase() === 'kelas') hiddenIdx.add(i);
         });
 
+        // Hitung statistik perguruan
         var stats = {};
         rows.forEach(function(row) {
           var p = (row[orgIdx] || '').trim().toUpperCase();
           if (p) stats[p] = (stats[p] || 0) + 1;
         });
-        ALL_DATA = { headers: headers, rows: rows, stats: stats, total: rows.length, nameIdx: nameIdx, orgIdx: orgIdx, hiddenIdx: hiddenIdx };
+
+        // Hitung jumlah per kelas
+        var kelasCounts = {};
+        rows.forEach(function(row) {
+          var k = (row[kelasIdx] || '').trim();
+          if (k) kelasCounts[k] = (kelasCounts[k] || 0) + 1;
+        });
+
+        ALL_DATA = {
+          headers: headers, rows: rows, stats: stats, total: rows.length,
+          nameIdx: nameIdx, orgIdx: orgIdx, kelasIdx: kelasIdx, hiddenIdx: hiddenIdx
+        };
+
         document.getElementById('loading').style.display     = 'none';
         document.getElementById('mainContent').style.display = 'block';
+
         renderStats(stats, rows.length);
         renderFilterBtns(stats);
+        renderKelasBtns(kelasCounts);
         renderTable(headers, rows);
         renderCards(headers, rows);
         document.getElementById('resultInfo').textContent = 'Menampilkan ' + rows.length + ' atlet';
